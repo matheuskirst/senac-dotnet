@@ -1,4 +1,4 @@
-﻿namespace Exemplos
+﻿namespace Metodos
 {
     internal class Program
     {

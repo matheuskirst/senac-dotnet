@@ -86,9 +86,7 @@
             Pedido pedido1 = new Pedido(
                 cliente: pessoa1,
                 produtos: [produto1, produto2],
-                dataDoServico: DateTime.Now,
-                observacao: "",
-                pago: false
+                dataDoServico: DateTime.Now
                 );
 
             MostrarInformacoes.Pedido(pedido1);

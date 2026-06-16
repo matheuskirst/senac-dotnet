@@ -1,6 +1,12 @@
 ﻿namespace OrientacaoAObjeto
 {
-    internal class Pedido(Pessoa cliente, IList<Produto> produtos, DateTime dataDoServico, string observacao, bool pago)
+    internal class Pedido(
+        Pessoa cliente,
+        IList<Produto> produtos,
+        DateTime dataDoServico,
+        string observacao = "Nenhuma.",
+        bool pago = false
+        )
     {
         public Pessoa Cliente { get; private set; } = cliente;
         public IList<Produto> Produtos { get; private set; } = produtos;
