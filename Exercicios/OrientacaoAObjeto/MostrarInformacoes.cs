@@ -30,7 +30,7 @@
                 Console.WriteLine($"Data de nascimento: {pessoa.DataDeNascimento}");
                 Console.WriteLine($"Idade: {pessoa.Idade} anos");
                 Console.WriteLine($"CPF: {FormatarCpf(pessoa.Cpf)}");
-                Console.WriteLine($"É ativo: {(pessoa.isAtivo ? "Sim" : "Não")}");
+                Console.WriteLine($"Ativo: {(pessoa.isAtivo ? "Sim" : "Não")}");
             }
             else
             {
@@ -66,7 +66,7 @@
                 Console.WriteLine($"Marca: {produto.Marca}");
                 Console.WriteLine($"Preço: {produto.Preco}");
                 Console.WriteLine($"Descrição: {produto.Decricao}");
-                Console.WriteLine($"Em estoque?: {(produto.EmEstoque ? "Sim" : "Não")}");
+                Console.WriteLine($"Em estoque: {(produto.EmEstoque ? "Sim" : "Não")}");
                 Console.WriteLine($"Quantidade em estoque: {produto.QuantidadeEstoque}");
             }
             else
@@ -90,11 +90,12 @@
                         pedidoProdutos += ", ";
                     }
                 }
+                Console.WriteLine($"Quantidade de items: {pedido.Produtos.Count}");
                 Console.WriteLine($"Produtos: {pedidoProdutos}");
-                Console.WriteLine($"Data do serviço: {pedido.DataDoServico}");
                 Console.WriteLine($"ValorTotal: R$ {pedido.ValorTotal:F2}");
+                Console.WriteLine($"Data do serviço: {pedido.DataDoServico}");
                 Console.WriteLine($"Observação: {pedido.Observacao}");
-                Console.WriteLine($"Pago?: {(pedido.IsPago ? "Sim" : "Não")}");
+                Console.WriteLine($"Pago: {(pedido.IsPago ? "Sim" : "Não")}");
             }
             else
             {
