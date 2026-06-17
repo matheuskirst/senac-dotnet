@@ -1,19 +1,36 @@
 ﻿namespace OrientacaoAObjeto
 {
-    internal class Pedido(
-        Pessoa cliente,
-        IList<Produto> produtos,
-        DateTime dataDoServico,
-        string observacao = "Nenhuma.",
-        bool pago = false
-        )
+    internal class Pedido
     {
-        public Pessoa Cliente { get; private set; } = cliente;
-        public IList<Produto> Produtos { get; private set; } = produtos;
-        public double? ValorTotal { get; private set; } = CalcularValorTotal(produtos);
-        public DateTime DataDoServico { get; private set; } = dataDoServico;
-        public string Observacao { get; private set; } = observacao;
-        public bool IsPago { get; private set; } = pago;
+        public Pedido(Pessoa cliente, IList<Produto> produtos, DateTime dataDoServico)
+    {
+            Cliente = cliente;
+            DataDoServico = dataDoServico;
+            Produtos = produtos;
+            ValorTotal = CalcularValorTotal(produtos);
+        }
+
+        public Pedido(Pessoa cliente,
+            DateTime dataDoServico,
+            IList<Produto> produtos,
+            string observacao,
+            bool isPago
+            )
+    {
+            Cliente = cliente;
+            DataDoServico = dataDoServico;
+            Produtos = produtos;
+            ValorTotal = CalcularValorTotal(produtos);
+            Observacao = observacao;
+            IsPago = isPago;
+    }
+
+        public Pessoa Cliente { get; private set; }
+        public DateTime DataDoServico { get; private set; }
+        public IList<Produto> Produtos { get; private set; }
+        public double? ValorTotal { get; private set; }
+        public string? Observacao { get; set; }
+        public bool IsPago { get; set; }
         
         public static double CalcularValorTotal(IList<Produto> produtos)
         {

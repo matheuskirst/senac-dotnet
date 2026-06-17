@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             // Criar pessoas
-            Pessoa pessoa1 = new Pessoa(
+            var pessoa1 = new Pessoa(
                 nome:"Guilherme",
                 dataNascimento:new DateOnly(2004, 7, 16),
                 cpf: "12345678901",
@@ -17,7 +17,7 @@
             pessoa1.SeComunicar();
             Console.WriteLine("");
 
-            Pessoa pessoa2 = new Pessoa(
+            var pessoa2 = new Pessoa(
                 nome: "João",
                 dataNascimento: new DateOnly(1990, 4, 22),
                 cpf: "adpowdmao",
@@ -31,7 +31,7 @@
 
 
             // Criar cachorros
-            Cachorro cachorro1 = new Cachorro(
+            var cachorro1 = new Cachorro(
                 nome: "Rex",
                 raca: "Buldogue",
                 dataNascimento: new DateOnly(2023, 3, 12),
@@ -44,7 +44,7 @@
             cachorro1.Latir();
             Console.WriteLine("");
 
-            Cachorro cachorro2 = new Cachorro(
+            var cachorro2 = new Cachorro(
                 nome: "Max",
                 raca: "Pastor-alemão",
                 dataNascimento: new DateOnly(2021, 2, 25),
@@ -58,7 +58,7 @@
 
 
             // Criar produtos
-            Produto produto1 = new Produto(
+            var produto1 = new Produto(
                 nome: "Mouse Logitech G203",
                 marca: "Logitech",
                 preco: 98.99,
@@ -70,7 +70,7 @@
             MostrarInformacoes.Produto(produto1);
             Console.WriteLine("");
 
-            Produto produto2 = new Produto(
+            var produto2 = new Produto(
                 nome: "Air Cooler DeepCool AG620",
                 marca: "DeepCool",
                 preco: 299.99,
@@ -83,7 +83,7 @@
             Console.WriteLine("");
 
             // Criar pedidos
-            Pedido pedido1 = new Pedido(
+            var pedido1 = new Pedido(
                 cliente: pessoa1,
                 produtos: [produto1, produto2],
                 dataDoServico: DateTime.Now
