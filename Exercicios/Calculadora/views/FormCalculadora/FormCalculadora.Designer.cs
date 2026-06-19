@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            numberOneBox = new TextBox();
-            numberTwoBox = new TextBox();
+            numeroUmBox = new TextBox();
+            numeroDoisBox = new TextBox();
             addButton = new Button();
             minusButton = new Button();
             multiplyButton = new Button();
@@ -37,27 +37,38 @@
             label1 = new Label();
             resultLabel = new Label();
             calcSymbol = new Label();
+            panel1 = new Panel();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // numberOneBox
+            // numeroUmBox
             // 
-            numberOneBox.Location = new Point(12, 12);
-            numberOneBox.Name = "numberOneBox";
-            numberOneBox.Size = new Size(125, 27);
-            numberOneBox.TabIndex = 0;
+            numeroUmBox.Anchor = AnchorStyles.None;
+            numeroUmBox.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            numeroUmBox.Location = new Point(9, 40);
+            numeroUmBox.Margin = new Padding(3, 2, 3, 2);
+            numeroUmBox.Name = "numeroUmBox";
+            numeroUmBox.Size = new Size(109, 33);
+            numeroUmBox.TabIndex = 0;
             // 
-            // numberTwoBox
+            // numeroDoisBox
             // 
-            numberTwoBox.Location = new Point(168, 12);
-            numberTwoBox.Name = "numberTwoBox";
-            numberTwoBox.Size = new Size(125, 27);
-            numberTwoBox.TabIndex = 1;
+            numeroDoisBox.Anchor = AnchorStyles.None;
+            numeroDoisBox.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            numeroDoisBox.Location = new Point(146, 40);
+            numeroDoisBox.Margin = new Padding(3, 2, 3, 2);
+            numeroDoisBox.Name = "numeroDoisBox";
+            numeroDoisBox.Size = new Size(110, 33);
+            numeroDoisBox.TabIndex = 1;
             // 
             // addButton
             // 
-            addButton.Location = new Point(12, 68);
+            addButton.Anchor = AnchorStyles.None;
+            addButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            addButton.Location = new Point(12, 110);
+            addButton.Margin = new Padding(3, 2, 3, 2);
             addButton.Name = "addButton";
-            addButton.Size = new Size(94, 29);
+            addButton.Size = new Size(106, 34);
             addButton.TabIndex = 2;
             addButton.Text = "+";
             addButton.UseVisualStyleBackColor = true;
@@ -65,9 +76,12 @@
             // 
             // minusButton
             // 
-            minusButton.Location = new Point(112, 68);
+            minusButton.Anchor = AnchorStyles.None;
+            minusButton.Font = new Font("Segoe UI", 11.25F);
+            minusButton.Location = new Point(146, 110);
+            minusButton.Margin = new Padding(3, 2, 3, 2);
             minusButton.Name = "minusButton";
-            minusButton.Size = new Size(94, 29);
+            minusButton.Size = new Size(106, 34);
             minusButton.TabIndex = 3;
             minusButton.Text = "-";
             minusButton.UseVisualStyleBackColor = true;
@@ -75,9 +89,12 @@
             // 
             // multiplyButton
             // 
-            multiplyButton.Location = new Point(12, 103);
+            multiplyButton.Anchor = AnchorStyles.None;
+            multiplyButton.Font = new Font("Segoe UI", 11.25F);
+            multiplyButton.Location = new Point(12, 158);
+            multiplyButton.Margin = new Padding(3, 2, 3, 2);
             multiplyButton.Name = "multiplyButton";
-            multiplyButton.Size = new Size(94, 29);
+            multiplyButton.Size = new Size(106, 34);
             multiplyButton.TabIndex = 4;
             multiplyButton.Text = "*";
             multiplyButton.UseVisualStyleBackColor = true;
@@ -85,9 +102,12 @@
             // 
             // divideButton
             // 
-            divideButton.Location = new Point(112, 103);
+            divideButton.Anchor = AnchorStyles.None;
+            divideButton.Font = new Font("Segoe UI", 11.25F);
+            divideButton.Location = new Point(146, 158);
+            divideButton.Margin = new Padding(3, 2, 3, 2);
             divideButton.Name = "divideButton";
-            divideButton.Size = new Size(94, 29);
+            divideButton.Size = new Size(106, 34);
             divideButton.TabIndex = 5;
             divideButton.Text = "/";
             divideButton.UseVisualStyleBackColor = true;
@@ -95,55 +115,74 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
-            label1.Location = new Point(12, 155);
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(3, 17);
             label1.Name = "label1";
-            label1.Size = new Size(78, 20);
+            label1.Size = new Size(82, 21);
             label1.TabIndex = 6;
             label1.Text = "Resultado:";
             // 
             // resultLabel
             // 
+            resultLabel.Anchor = AnchorStyles.None;
             resultLabel.AutoSize = true;
-            resultLabel.Location = new Point(96, 155);
+            resultLabel.Font = new Font("Segoe UI", 12F);
+            resultLabel.Location = new Point(91, 17);
             resultLabel.Name = "resultLabel";
-            resultLabel.Size = new Size(0, 20);
+            resultLabel.Size = new Size(0, 21);
             resultLabel.TabIndex = 7;
             // 
             // calcSymbol
             // 
+            calcSymbol.Anchor = AnchorStyles.None;
             calcSymbol.AutoSize = true;
-            calcSymbol.Location = new Point(143, 15);
+            calcSymbol.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            calcSymbol.Location = new Point(120, 43);
             calcSymbol.Name = "calcSymbol";
-            calcSymbol.Size = new Size(0, 20);
+            calcSymbol.Size = new Size(0, 25);
             calcSymbol.TabIndex = 8;
             calcSymbol.Click += label2_Click;
             // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.None;
+            panel1.BackColor = SystemColors.ControlLight;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(resultLabel);
+            panel1.Location = new Point(9, 224);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(243, 85);
+            panel1.TabIndex = 9;
+            // 
             // FormCalculadora
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(264, 321);
+            Controls.Add(panel1);
             Controls.Add(calcSymbol);
-            Controls.Add(resultLabel);
-            Controls.Add(label1);
             Controls.Add(divideButton);
             Controls.Add(multiplyButton);
             Controls.Add(minusButton);
             Controls.Add(addButton);
-            Controls.Add(numberTwoBox);
-            Controls.Add(numberOneBox);
+            Controls.Add(numeroDoisBox);
+            Controls.Add(numeroUmBox);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FormCalculadora";
             Text = "FormCalculadora";
             Load += FormCalculadora_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox numberOneBox;
-        private TextBox numberTwoBox;
+        private TextBox numeroUmBox;
+        private TextBox numeroDoisBox;
         private Button addButton;
         private Button minusButton;
         private Button multiplyButton;
@@ -151,5 +190,6 @@
         private Label label1;
         private Label resultLabel;
         private Label calcSymbol;
+        private Panel panel1;
     }
 }

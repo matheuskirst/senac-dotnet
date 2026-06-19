@@ -1,4 +1,4 @@
-namespace Calculadora
+namespace SistemaDeLogin
 {
     public partial class FormLogin : Form
     {
@@ -23,7 +23,8 @@ namespace Calculadora
             if (userName == "admin" && password == "1234")
             {
                 this.Hide();
-                new FormCalculadora().Show();
+                var currentUser = new Usuario(userName, password);
+                new MenuPrincipal(currentUser).Show();
             }
             else
             {
@@ -38,7 +39,7 @@ namespace Calculadora
 
         private void DisableButtonLogin(object sender, EventArgs e)
         {
-            if (userNameBox.Text == "" && passwordBox.Text == "")
+            if (userNameBox.Text == "" || passwordBox.Text == "")
             {
                 buttonLogin.Enabled = false;
             }

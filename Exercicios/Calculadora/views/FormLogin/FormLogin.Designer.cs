@@ -1,4 +1,4 @@
-﻿namespace SistemaDeLogin
+﻿namespace Calculadora
 {
     partial class FormLogin
     {
@@ -37,44 +37,53 @@
             // 
             // userNameLabel
             // 
+            userNameLabel.Anchor = AnchorStyles.None;
             userNameLabel.AutoSize = true;
-            userNameLabel.Font = new Font("Segoe UI", 12F);
-            userNameLabel.Location = new Point(12, 9);
+            userNameLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            userNameLabel.Location = new Point(43, 90);
             userNameLabel.Name = "userNameLabel";
-            userNameLabel.Size = new Size(83, 28);
+            userNameLabel.Size = new Size(62, 20);
             userNameLabel.TabIndex = 0;
             userNameLabel.Text = "Usuário:";
             // 
             // userNameBox
             // 
-            userNameBox.Location = new Point(119, 13);
+            userNameBox.Anchor = AnchorStyles.None;
+            userNameBox.Location = new Point(111, 91);
+            userNameBox.Margin = new Padding(3, 2, 3, 2);
             userNameBox.Name = "userNameBox";
-            userNameBox.Size = new Size(125, 27);
+            userNameBox.Size = new Size(110, 23);
             userNameBox.TabIndex = 1;
             // 
             // passwordBox
             // 
-            passwordBox.Location = new Point(119, 65);
+            passwordBox.Anchor = AnchorStyles.None;
+            passwordBox.Location = new Point(111, 126);
+            passwordBox.Margin = new Padding(3, 2, 3, 2);
             passwordBox.Name = "passwordBox";
-            passwordBox.Size = new Size(125, 27);
+            passwordBox.Size = new Size(110, 23);
             passwordBox.TabIndex = 2;
             passwordBox.UseSystemPasswordChar = true;
             // 
             // passwordLabel
             // 
+            passwordLabel.Anchor = AnchorStyles.None;
             passwordLabel.AutoSize = true;
-            passwordLabel.Font = new Font("Segoe UI", 12F);
-            passwordLabel.Location = new Point(12, 61);
+            passwordLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passwordLabel.Location = new Point(43, 129);
             passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(69, 28);
+            passwordLabel.Size = new Size(52, 20);
             passwordLabel.TabIndex = 3;
             passwordLabel.Text = "Senha:";
             // 
             // buttonLogin
             // 
-            buttonLogin.Location = new Point(12, 130);
+            buttonLogin.Anchor = AnchorStyles.None;
+            buttonLogin.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonLogin.Location = new Point(91, 260);
+            buttonLogin.Margin = new Padding(3, 2, 3, 2);
             buttonLogin.Name = "buttonLogin";
-            buttonLogin.Size = new Size(94, 29);
+            buttonLogin.Size = new Size(82, 35);
             buttonLogin.TabIndex = 4;
             buttonLogin.Text = "Login";
             buttonLogin.UseVisualStyleBackColor = true;
@@ -82,14 +91,15 @@
             // 
             // FormLogin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(860, 499);
+            ClientSize = new Size(264, 321);
             Controls.Add(buttonLogin);
             Controls.Add(passwordLabel);
             Controls.Add(passwordBox);
             Controls.Add(userNameBox);
             Controls.Add(userNameLabel);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FormLogin";
             Text = "Sistema de Login";
             Load += Form1_Load;
