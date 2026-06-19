@@ -84,5 +84,22 @@ namespace Calculadora
         {
 
         }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Fechar calculadora?",
+                "Fechar aplicação",
+                MessageBoxButtons.OKCancel
+                );
+
+            if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
