@@ -1,6 +1,6 @@
 ﻿namespace SistemaDeLogin
 {
-    partial class Form1
+    partial class FormLogin
     {
         /// <summary>
         ///  Required designer variable.
@@ -58,6 +58,7 @@
             passwordBox.Name = "passwordBox";
             passwordBox.Size = new Size(125, 27);
             passwordBox.TabIndex = 2;
+            passwordBox.UseSystemPasswordChar = true;
             // 
             // passwordLabel
             // 
@@ -79,7 +80,7 @@
             buttonLogin.UseVisualStyleBackColor = true;
             buttonLogin.Click += ButtonLogin_Click;
             // 
-            // Form1
+            // FormLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -89,7 +90,7 @@
             Controls.Add(passwordBox);
             Controls.Add(userNameBox);
             Controls.Add(userNameLabel);
-            Name = "Form1";
+            Name = "FormLogin";
             Text = "Sistema de Login";
             Load += Form1_Load;
             ResumeLayout(false);

@@ -1,4 +1,4 @@
-namespace SistemaDeLogin
+namespace Calculadora
 {
     internal static class Program
     {
@@ -12,11 +12,6 @@ namespace SistemaDeLogin
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new FormLogin());
-        }
-
-        static void Login()
-        {
-
         }
     }
 }
