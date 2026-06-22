@@ -31,7 +31,7 @@
             modulusButton = new Button();
             clearEntryButton = new Button();
             clearAllButton = new Button();
-            deleteButton = new Button();
+            backspaceButton = new Button();
             divideButton = new Button();
             button6 = new Button();
             squareButton = new Button();
@@ -102,19 +102,19 @@
             clearAllButton.UseVisualStyleBackColor = false;
             clearAllButton.Click += clearAllButton_Click;
             // 
-            // deleteButton
+            // backspaceButton
             // 
-            deleteButton.BackColor = SystemColors.ButtonFace;
-            deleteButton.Dock = DockStyle.Fill;
-            deleteButton.Font = new Font("Segoe UI", 15.75F);
-            deleteButton.Location = new Point(237, 144);
-            deleteButton.Margin = new Padding(3, 2, 3, 2);
-            deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(74, 49);
-            deleteButton.TabIndex = 4;
-            deleteButton.Text = "⌫";
-            deleteButton.UseVisualStyleBackColor = false;
-            deleteButton.Click += deleteButton_Click;
+            backspaceButton.BackColor = SystemColors.ButtonFace;
+            backspaceButton.Dock = DockStyle.Fill;
+            backspaceButton.Font = new Font("Segoe UI", 15.75F);
+            backspaceButton.Location = new Point(237, 144);
+            backspaceButton.Margin = new Padding(3, 2, 3, 2);
+            backspaceButton.Name = "backspaceButton";
+            backspaceButton.Size = new Size(74, 49);
+            backspaceButton.TabIndex = 4;
+            backspaceButton.Text = "⌫";
+            backspaceButton.UseVisualStyleBackColor = false;
+            backspaceButton.Click += deleteButton_Click;
             // 
             // divideButton
             // 
@@ -353,6 +353,7 @@
             commaButton.TabIndex = 23;
             commaButton.Text = ",";
             commaButton.UseVisualStyleBackColor = true;
+            commaButton.Click += commaButton_Click;
             // 
             // zeroButton
             // 
@@ -365,6 +366,7 @@
             zeroButton.TabIndex = 22;
             zeroButton.Text = "0";
             zeroButton.UseVisualStyleBackColor = true;
+            zeroButton.Click += zeroButton_Click;
             // 
             // moreOrLessButton
             // 
@@ -387,7 +389,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.Controls.Add(moreOrLessButton, 0, 6);
             tableLayoutPanel1.Controls.Add(clearAllButton, 2, 1);
-            tableLayoutPanel1.Controls.Add(deleteButton, 3, 1);
+            tableLayoutPanel1.Controls.Add(backspaceButton, 3, 1);
             tableLayoutPanel1.Controls.Add(divideButton, 3, 2);
             tableLayoutPanel1.Controls.Add(zeroButton, 1, 6);
             tableLayoutPanel1.Controls.Add(clearEntryButton, 1, 1);
@@ -443,30 +445,30 @@
             // 
             // entryBox
             // 
-            entryBox.BackColor = SystemColors.ButtonHighlight;
+            entryBox.BackColor = SystemColors.ControlLight;
             entryBox.BorderStyle = BorderStyle.None;
             entryBox.Dock = DockStyle.Bottom;
-            entryBox.Font = new Font("Segoe UI", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            entryBox.Location = new Point(3, 63);
+            entryBox.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            entryBox.Location = new Point(3, 70);
             entryBox.Margin = new Padding(3, 2, 3, 2);
             entryBox.Name = "entryBox";
-            entryBox.Size = new Size(302, 86);
+            entryBox.Size = new Size(302, 64);
             entryBox.TabIndex = 1;
             entryBox.TextAlign = HorizontalAlignment.Right;
             entryBox.KeyPress += entryBox_KeyPress;
             // 
             // expressionBox
             // 
-            expressionBox.BackColor = SystemColors.ButtonHighlight;
+            expressionBox.BackColor = SystemColors.ControlLight;
             expressionBox.BorderStyle = BorderStyle.None;
             expressionBox.Dock = DockStyle.Bottom;
-            expressionBox.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            expressionBox.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             expressionBox.ForeColor = Color.FromArgb(64, 64, 64);
-            expressionBox.Location = new Point(3, 16);
+            expressionBox.Location = new Point(3, 20);
             expressionBox.Margin = new Padding(3, 2, 3, 2);
             expressionBox.Name = "expressionBox";
             expressionBox.ReadOnly = true;
-            expressionBox.Size = new Size(302, 43);
+            expressionBox.Size = new Size(302, 39);
             expressionBox.TabIndex = 0;
             expressionBox.TextAlign = HorizontalAlignment.Right;
             // 
@@ -480,6 +482,7 @@
             MinimumSize = new Size(330, 500);
             Name = "FormCalculadora";
             Text = "Calculadora";
+            Load += FormCalculadora_Load;
             KeyDown += FormCalculadora_KeyDown;
             KeyPress += FormCalculadora_KeyPress;
             tableLayoutPanel1.ResumeLayout(false);
@@ -492,7 +495,7 @@
         private Button modulusButton;
         private Button clearEntryButton;
         private Button clearAllButton;
-        private Button deleteButton;
+        private Button backspaceButton;
         private Button divideButton;
         private Button button6;
         private Button squareButton;

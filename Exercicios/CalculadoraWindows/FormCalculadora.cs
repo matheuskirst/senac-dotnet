@@ -2,10 +2,7 @@ namespace CalculadoraWindows
 {
     public partial class FormCalculadora : Form
     {
-        private string? entryNumbers = "";
-        private string? expressionNumbers = "";
-        private string? lastResult = "";
-
+        public Calculadora calculator = new Calculadora();
         public FormCalculadora()
         {
             InitializeComponent();
@@ -17,10 +14,9 @@ namespace CalculadoraWindows
         {
             if (char.IsDigit(e.KeyChar))
             {
-                entryNumbers += e.KeyChar;
+                calculator.AddDigit(e.KeyChar.ToString());
 
-                entryBox.Text = "";
-                entryBox.Text = entryNumbers;
+                entryBox.AppendText(e.KeyChar.ToString());
             }
         }
 
@@ -50,132 +46,139 @@ namespace CalculadoraWindows
 
                 case Keys.Delete: clearAllButton_Click(sender, e); break;
 
-                case Keys.Back: deleteButton_Click(sender, e); break;
+                //case Keys.Back: deleteButton_Click(sender, e); break;
             }
         }
 
         private void numberOneButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "1";
+            calculator.AddDigit("1");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberTwoButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "2";
+            calculator.AddDigit("2");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberThreeButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "3";
+            calculator.AddDigit("3");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberFourButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "4";
+            calculator.AddDigit("4");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberFiveButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "5";
+            calculator.AddDigit("5");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberSixButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "6";
+            calculator.AddDigit("6");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberSevenButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "7";
+            calculator.AddDigit("7");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberEightButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "8";
+            calculator.AddDigit("8");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void numberNineButton_Click(object sender, EventArgs e)
         {
-            entryNumbers += "9";
+            calculator.AddDigit("9");
 
-            entryBox.Text = entryNumbers;
+            entryBox.Text = calculator.currentInput;
+            this.ActiveControl = null;
+        }
+
+        private void zeroButton_Click(object sender, EventArgs e)
+        {
+            calculator.AddDigit("0");
+
+            entryBox.Text = calculator.currentInput;
+            this.ActiveControl = null;
+        }
+
+        private void commaButton_Click(object sender, EventArgs e)
+        {
+            calculator.AddDigit(",");
+
+            entryBox.Text = calculator.currentInput;
             this.ActiveControl = null;
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-
-            expressionNumbers += entryNumbers;
-            expressionNumbers += lastResult;
-            expressionNumbers += "+";
-            entryNumbers = "";
+            calculator.SetOperation("+");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(entryBox.Text);
+            expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" + ");
+            entryBox.Text = calculator.resultValue.ToString();
             this.ActiveControl = null;
         }
 
         private void subtractButton_Click(object sender, EventArgs e)
         {
-            expressionNumbers += entryNumbers;
-            expressionNumbers += lastResult;
-            expressionNumbers += "-";
-            entryNumbers = "";
+            calculator.SetOperation("-");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(entryBox.Text);
+            expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" - ");
+            entryBox.Text = calculator.resultValue.ToString();
             this.ActiveControl = null;
         }
 
         private void multiplyButton_Click(object sender, EventArgs e)
         {
-            expressionNumbers += entryNumbers;
-            expressionNumbers += lastResult;
-            expressionNumbers += "*";
-            entryNumbers = "";
+            calculator.SetOperation("*");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(entryBox.Text);
+            expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" x ");
+            entryBox.Text = calculator.resultValue.ToString();
             this.ActiveControl = null;
         }
 
         private void divideButton_Click(object sender, EventArgs e)
         {
-            expressionNumbers += entryNumbers;
-            expressionNumbers += lastResult;
-            expressionNumbers += "/";
-            entryNumbers = "";
+            calculator.SetOperation("/");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(entryBox.Text);
+            expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" ÷ ");
+            entryBox.Text = calculator.resultValue.ToString();
             this.ActiveControl = null;
         }
 
@@ -188,17 +191,11 @@ namespace CalculadoraWindows
         {
             try
             {
-                lastResult = "";
-                expressionNumbers += entryNumbers;
-                System.Data.DataTable table = new System.Data.DataTable();
-                object result = table.Compute(expressionNumbers, "");
-                lastResult = result.ToString();
-                entryNumbers = "";
-                expressionNumbers = "";
+                calculator.Calculate();
 
                 expressionBox.AppendText(entryBox.Text);
                 expressionBox.AppendText(" = ");
-                entryBox.Text = result.ToString();
+                entryBox.Text = calculator.resultValue.ToString();
                 this.ActiveControl = null;
             }
             catch (Exception)
@@ -213,7 +210,7 @@ namespace CalculadoraWindows
 
         private void clearEntryButton_Click(object sender, EventArgs e)
         {
-            entryNumbers = "";
+            calculator.Clear();
 
             entryBox.Text = "0";
             this.ActiveControl = null;
@@ -221,9 +218,7 @@ namespace CalculadoraWindows
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            expressionNumbers = "";
-            entryNumbers = "";
-            lastResult = "";
+            calculator.Clear();
 
             expressionBox.Text = "";
             entryBox.Text = "0";
@@ -232,27 +227,7 @@ namespace CalculadoraWindows
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (entryNumbers != null && entryNumbers != "")
-            {
 
-                entryNumbers = entryNumbers.Remove(entryNumbers.Length - 1);
-                entryBox.Text = "";
-                entryBox.Text = entryNumbers;
-            }
-
-            if (entryNumbers == "" && lastResult == "")
-            {
-                entryBox.Text = "0";
-            }
-
-            if (lastResult != "")
-            {
-                expressionNumbers = "";
-
-                expressionBox.Text = "";
-                entryBox.Text = "";
-                entryBox.Text = lastResult;
-            }
             this.ActiveControl = null;
         }
 
@@ -262,6 +237,11 @@ namespace CalculadoraWindows
             {
                 e.Handled = true;
             }
+        }
+
+        private void FormCalculadora_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
