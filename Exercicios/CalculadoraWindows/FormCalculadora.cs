@@ -1,3 +1,5 @@
+using System.Net.Http.Metrics;
+
 namespace CalculadoraWindows
 {
     public partial class FormCalculadora : Form
@@ -16,7 +18,7 @@ namespace CalculadoraWindows
             {
                 calculator.AddDigit(e.KeyChar.ToString());
 
-                entryBox.AppendText(e.KeyChar.ToString());
+                RefreshEntryBox();
             }
         }
 
@@ -46,7 +48,7 @@ namespace CalculadoraWindows
 
                 case Keys.Delete: clearAllButton_Click(sender, e); break;
 
-                //case Keys.Back: deleteButton_Click(sender, e); break;
+                case Keys.Back: backspaceButton_Click(sender, e); break;
             }
         }
 
@@ -54,88 +56,77 @@ namespace CalculadoraWindows
         {
             calculator.AddDigit("1");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberTwoButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("2");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberThreeButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("3");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberFourButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("4");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberFiveButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("5");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberSixButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("6");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberSevenButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("7");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberEightButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("8");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void numberNineButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("9");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void zeroButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("0");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void commaButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit(",");
 
-            entryBox.Text = calculator.currentInput;
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -145,8 +136,7 @@ namespace CalculadoraWindows
             expressionBox.Text = "";
             expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" + ");
-            entryBox.Text = calculator.resultValue.ToString();
-            this.ActiveControl = null;
+            UpdateEntryWithResult();
         }
 
         private void subtractButton_Click(object sender, EventArgs e)
@@ -156,8 +146,7 @@ namespace CalculadoraWindows
             expressionBox.Text = "";
             expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" - ");
-            entryBox.Text = calculator.resultValue.ToString();
-            this.ActiveControl = null;
+            UpdateEntryWithResult();
         }
 
         private void multiplyButton_Click(object sender, EventArgs e)
@@ -167,8 +156,7 @@ namespace CalculadoraWindows
             expressionBox.Text = "";
             expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" x ");
-            entryBox.Text = calculator.resultValue.ToString();
-            this.ActiveControl = null;
+            UpdateEntryWithResult();
         }
 
         private void divideButton_Click(object sender, EventArgs e)
@@ -178,13 +166,34 @@ namespace CalculadoraWindows
             expressionBox.Text = "";
             expressionBox.AppendText(calculator.resultValue.ToString());
             expressionBox.AppendText(" ÷ ");
-            entryBox.Text = calculator.resultValue.ToString();
-            this.ActiveControl = null;
+            UpdateEntryWithResult();
         }
 
         private void modulusButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void squareButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                expressionBox.Text = "";
+                expressionBox.AppendText($"sqr({calculator.currentInput})");
+                calculator.SetOperation("sqr");
+                UpdateEntryWithResult();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
+        }
+
+        private void moreOrLessButton_Click(object sender, EventArgs e)
+        {
+            calculator.Negate();
+            UpdateEntryWithResult();
         }
 
         private void equalsButton_Click(object sender, EventArgs e)
@@ -195,10 +204,13 @@ namespace CalculadoraWindows
 
                 expressionBox.AppendText(entryBox.Text);
                 expressionBox.AppendText(" = ");
-                entryBox.Text = calculator.resultValue.ToString();
-                this.ActiveControl = null;
+                UpdateEntryWithResult();
             }
-            catch (Exception)
+            catch (InvalidOperationException)
+            {
+
+            }
+            catch (DivideByZeroException)
             {
                 MessageBox.Show("Expressão matemática inválida!",
                     "Erro",
@@ -210,23 +222,23 @@ namespace CalculadoraWindows
 
         private void clearEntryButton_Click(object sender, EventArgs e)
         {
-            calculator.Clear();
+            calculator.ClearEntry();
 
-            entryBox.Text = "0";
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            calculator.Clear();
+            calculator.ClearAll();
 
             expressionBox.Text = "";
-            entryBox.Text = "0";
-            this.ActiveControl = null;
+            RefreshEntryBox();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void backspaceButton_Click(object sender, EventArgs e)
         {
+            calculator.Backspace();
+            RefreshEntryBox();
 
             this.ActiveControl = null;
         }
@@ -239,9 +251,29 @@ namespace CalculadoraWindows
             }
         }
 
+        private void RefreshEntryBox()
+        {
+            if (calculator.currentInput != "")
+            {
+                entryBox.Text = calculator.currentInput;
+            }
+            else
+            {
+                entryBox.Text = "0";
+            }
+            this.ActiveControl = null;
+        }
+
+        private void UpdateEntryWithResult()
+        {
+            entryBox.Text = calculator.resultValue.ToString();
+            this.ActiveControl = null;
+        }
+
         private void FormCalculadora_Load(object sender, EventArgs e)
         {
 
         }
+
     }
 }
