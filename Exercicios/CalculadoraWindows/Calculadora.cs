@@ -8,7 +8,7 @@ namespace CalculadoraWindows
 {
     public class Calculadora
     {
-        public decimal resultValue = 0;
+        public decimal? resultValue = null;
         public string currentInput = "";
         string selectedOperator = "";
         bool isOperatorSelected = false;
@@ -31,7 +31,7 @@ namespace CalculadoraWindows
             isOperatorSelected = true;
             if (currentInput != "")
             {
-                if (resultValue == 0)
+                if (resultValue == null)
                 {
                     resultValue = decimal.Parse(currentInput);
                 }
@@ -116,30 +116,16 @@ namespace CalculadoraWindows
 
         public void Square()
         {
-            if (double.TryParse(currentInput, out double result))
+            if (resultValue == null)
             {
-                try
-                {
-                    resultValue = (decimal)Math.Pow(result, 2);
-                    currentInput = resultValue.ToString();
-                }
-                catch (FormatException)
-                {
-
-                }
+                resultValue = decimal.Parse(currentInput);
             }
+            resultValue *= resultValue;
         }
 
         public void Negate()
         {
-            if (currentInput != "" && resultValue == 0)
-            {
-                resultValue = decimal.Parse(currentInput) * -1;
-            }
-            else if (currentInput == "" && resultValue != 0)
-            {
-                resultValue *= -1;
-            }
+            resultValue *= -1;
         }
 
         public void Backspace()
@@ -160,10 +146,15 @@ namespace CalculadoraWindows
 
         public void ClearAll()
         {
-            resultValue = 0;
+            resultValue = null;
             currentInput = "";
             selectedOperator = "";
             isOperatorSelected = false;
+        }
+
+        public decimal? GetResult()
+        {
+            return resultValue;
         }
     }
 }

@@ -1,10 +1,14 @@
 using System.Net.Http.Metrics;
+using System.Linq;
+using System.Globalization;
 
 namespace CalculadoraWindows
 {
     public partial class FormCalculadora : Form
     {
-        public Calculadora calculator = new Calculadora();
+        CultureInfo brazilCulture = new CultureInfo("pt-BR");
+        private Calculadora calculator = new Calculadora();
+        private bool _isButtonClicked = false;
         public FormCalculadora()
         {
             InitializeComponent();
@@ -12,13 +16,27 @@ namespace CalculadoraWindows
             this.KeyPreview = true;
         }
 
+        private void FormCalculadora_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void FormCalculadora_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar))
             {
                 calculator.AddDigit(e.KeyChar.ToString());
 
-                RefreshEntryBox();
+                RefreshUi();
+
+                foreach (Button btn in buttonsLayoutPanel.Controls.OfType<Button>())
+                {
+                    if (btn.Text == e.KeyChar.ToString())
+                    {
+                        ButtonClicked(btn);
+                    }
+                }
             }
         }
 
@@ -49,84 +67,134 @@ namespace CalculadoraWindows
                 case Keys.Delete: clearAllButton_Click(sender, e); break;
 
                 case Keys.Back: backspaceButton_Click(sender, e); break;
+
+                case Keys.Oemcomma: commaButton_Click(sender, e); break;
             }
+        }
+
+        private void RefreshUi(Button? button = null)
+        {
+            if (calculator.currentInput != "")
+            {
+                decimal? entryNumber = decimal.Parse(calculator.currentInput);
+                entryBox.Text = entryNumber.Value.ToString("#,##0.############################", brazilCulture);
+            }
+            else
+            {
+                entryBox.Text = "0";
+            }
+
+            if (button != null)
+            {
+                ButtonClicked(button);
+            }
+
+            this.ActiveControl = null;
+        }
+
+        private void UpdateEntryWithResult()
+        {
+            decimal? result = calculator.GetResult();
+            entryBox.Text = result.Value.ToString("#,##0.############################", brazilCulture);
+            this.ActiveControl = null;
+        }
+
+        private async void ButtonClicked(Button button, Color? color = null)
+        {
+            if (_isButtonClicked) return;
+
+            _isButtonClicked = true;
+            try
+            {
+                Color selectedColor = color ?? Color.LightGray;
+
+                Color originalColor = button.BackColor;
+
+                button.BackColor = selectedColor;
+
+                await Task.Delay(100);
+
+                button.BackColor = originalColor;
+                this.ActiveControl = null;
+            }
+            finally
+            {
+                _isButtonClicked = false;
+            }
+        }
+
+        private void backspaceButton_Click(object sender, EventArgs e)
+        {
+            calculator.Backspace();
+            RefreshUi(backspaceButton);
         }
 
         private void numberOneButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("1");
-
-            RefreshEntryBox();
+            RefreshUi(numberOneButton);
         }
 
         private void numberTwoButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("2");
-
-            RefreshEntryBox();
+            RefreshUi(numberTwoButton);
         }
 
         private void numberThreeButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("3");
-
-            RefreshEntryBox();
+            RefreshUi(numberThreeButton);
         }
 
         private void numberFourButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("4");
-
-            RefreshEntryBox();
+            RefreshUi(numberFourButton);
         }
 
         private void numberFiveButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("5");
-
-            RefreshEntryBox();
+            RefreshUi(numberFiveButton);
         }
 
         private void numberSixButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("6");
-
-            RefreshEntryBox();
+            RefreshUi(numberSixButton);
         }
 
         private void numberSevenButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("7");
-
-            RefreshEntryBox();
+            RefreshUi(numberSevenButton);
         }
 
         private void numberEightButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("8");
-
-            RefreshEntryBox();
+            RefreshUi(numberEightButton);
         }
 
         private void numberNineButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("9");
 
-            RefreshEntryBox();
+            RefreshUi(numberNineButton);
         }
 
         private void zeroButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit("0");
 
-            RefreshEntryBox();
+            RefreshUi(numberZeroButton);
         }
 
         private void commaButton_Click(object sender, EventArgs e)
         {
             calculator.AddDigit(",");
-
-            RefreshEntryBox();
+            RefreshUi(commaButton);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -134,9 +202,9 @@ namespace CalculadoraWindows
             calculator.SetOperation("+");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(calculator.resultValue.ToString());
-            expressionBox.AppendText(" + ");
+            expressionBox.AppendText($"{calculator.GetResult()} + ");
             UpdateEntryWithResult();
+            ButtonClicked(addButton);
         }
 
         private void subtractButton_Click(object sender, EventArgs e)
@@ -144,9 +212,9 @@ namespace CalculadoraWindows
             calculator.SetOperation("-");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(calculator.resultValue.ToString());
-            expressionBox.AppendText(" - ");
+            expressionBox.AppendText($"{calculator.GetResult()} - ");
             UpdateEntryWithResult();
+            ButtonClicked(subtractButton);
         }
 
         private void multiplyButton_Click(object sender, EventArgs e)
@@ -154,9 +222,9 @@ namespace CalculadoraWindows
             calculator.SetOperation("*");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(calculator.resultValue.ToString());
-            expressionBox.AppendText(" x ");
+            expressionBox.AppendText($"{calculator.GetResult()} x ");
             UpdateEntryWithResult();
+            ButtonClicked(multiplyButton);
         }
 
         private void divideButton_Click(object sender, EventArgs e)
@@ -164,9 +232,9 @@ namespace CalculadoraWindows
             calculator.SetOperation("/");
 
             expressionBox.Text = "";
-            expressionBox.AppendText(calculator.resultValue.ToString());
-            expressionBox.AppendText(" ÷ ");
+            expressionBox.AppendText($"{calculator.GetResult()} ÷ ");
             UpdateEntryWithResult();
+            ButtonClicked(divideButton);
         }
 
         private void modulusButton_Click(object sender, EventArgs e)
@@ -178,10 +246,17 @@ namespace CalculadoraWindows
         {
             try
             {
+
                 expressionBox.Text = "";
-                expressionBox.AppendText($"sqr({calculator.currentInput})");
+                decimal? result = calculator.GetResult();
+                if (result == null)
+                {
+                    result = decimal.Parse(calculator.currentInput);
+                }
+                expressionBox.AppendText($"sqr({result})");
                 calculator.SetOperation("sqr");
                 UpdateEntryWithResult();
+                ButtonClicked(squareButton);
             }
             catch (InvalidOperationException)
             {
@@ -224,7 +299,7 @@ namespace CalculadoraWindows
         {
             calculator.ClearEntry();
 
-            RefreshEntryBox();
+            RefreshUi(clearEntryButton);
         }
 
         private void clearAllButton_Click(object sender, EventArgs e)
@@ -232,48 +307,7 @@ namespace CalculadoraWindows
             calculator.ClearAll();
 
             expressionBox.Text = "";
-            RefreshEntryBox();
+            RefreshUi(clearAllButton);
         }
-
-        private void backspaceButton_Click(object sender, EventArgs e)
-        {
-            calculator.Backspace();
-            RefreshEntryBox();
-
-            this.ActiveControl = null;
-        }
-
-        private void entryBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void RefreshEntryBox()
-        {
-            if (calculator.currentInput != "")
-            {
-                entryBox.Text = calculator.currentInput;
-            }
-            else
-            {
-                entryBox.Text = "0";
-            }
-            this.ActiveControl = null;
-        }
-
-        private void UpdateEntryWithResult()
-        {
-            entryBox.Text = calculator.resultValue.ToString();
-            this.ActiveControl = null;
-        }
-
-        private void FormCalculadora_Load(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
