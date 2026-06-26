@@ -13,8 +13,8 @@
         public Pedido(Pessoa cliente,
             DateTime dataDoServico,
             IList<Produto> produtos,
-            string observacao,
-            bool isPago
+            string observacao = "Nenhuma",
+            bool isPago = false
             )
     {
             Cliente = cliente;

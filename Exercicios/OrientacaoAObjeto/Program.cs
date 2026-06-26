@@ -7,7 +7,7 @@
             // Criar pessoas
             var pessoa1 = new Pessoa(
                 nome:"Guilherme",
-                dataNascimento:new DateOnly(2004, 7, 16),
+                dataNascimento:new DateTime(2004, 7, 16),
                 cpf: "12345678901",
                 altura: 1.75,
                 ativo:true
@@ -19,7 +19,7 @@
 
             var pessoa2 = new Pessoa(
                 nome: "João",
-                dataNascimento: new DateOnly(1990, 4, 22),
+                dataNascimento: new DateTime(1990, 4, 22),
                 cpf: "adpowdmao",
                 altura: 1.80,
                 ativo: false
@@ -34,20 +34,20 @@
             var cachorro1 = new Cachorro(
                 nome: "Rex",
                 raca: "Buldogue",
-                dataNascimento: new DateOnly(2023, 3, 12),
+                dataNascimento: new DateTime(2023, 3, 12),
                 status: "Saudável",
                 adestrado: false,
                 vacinado: false
                 );
 
             MostrarInformacoes.Cachorro(cachorro1);
-            cachorro1.Latir();
+            cachorro1.SeComunicar();
             Console.WriteLine("");
 
             var cachorro2 = new Cachorro(
                 nome: "Max",
                 raca: "Pastor-alemão",
-                dataNascimento: new DateOnly(2021, 2, 25),
+                dataNascimento: new DateTime(2021, 2, 25),
                 status: "Saudável",
                 adestrado: true,
                 vacinado: true

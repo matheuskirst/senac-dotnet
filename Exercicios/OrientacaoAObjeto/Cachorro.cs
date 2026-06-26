@@ -1,15 +1,29 @@
 ﻿namespace OrientacaoAObjeto
 {
-    internal class Cachorro(string nome, string raca, DateOnly dataNascimento, string status, bool adestrado, bool vacinado)
+    public class Cachorro : Animal
     {
-        public string Nome { get; private set; } = nome;
-        public string Raca { get; private set; } = raca;
-        public DateOnly DataNascimento { get; private set; } = dataNascimento;
-        public int Idade { get; private set; } = DateTime.Now.Year - dataNascimento.Year;
-        public string Status { get; private set; } = status;
-        public bool IsAdestrado { get; private set; } = adestrado;
-        public bool IsVacinado { get; private set; } = vacinado;
-        public void Latir()
+        public Cachorro (
+            string nome,
+            DateTime dataNascimento,
+            string raca,
+            string status,
+            bool adestrado,
+            bool vacinado
+            )
+        {
+            Nome = nome;
+            DataDeNascimento = dataNascimento;
+            CalcularIdade();
+            Raca = raca;
+            Status = status;
+            IsAdestrado = adestrado;
+            IsVacinado = vacinado;
+        }
+        public string Raca { get; private set; }
+        public string Status { get; private set; }
+        public bool IsAdestrado { get; private set; }
+        public bool IsVacinado { get; private set; }
+        public override void SeComunicar()
         {
             Console.WriteLine($"{Nome}: Au Au!");
         }

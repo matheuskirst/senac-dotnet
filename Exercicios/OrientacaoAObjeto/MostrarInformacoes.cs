@@ -30,7 +30,7 @@
                 Console.WriteLine($"Data de nascimento: {pessoa.DataDeNascimento}");
                 Console.WriteLine($"Idade: {pessoa.Idade} anos");
                 Console.WriteLine($"CPF: {FormatarCpf(pessoa.Cpf)}");
-                Console.WriteLine($"Ativo: {(pessoa.isAtivo ? "Sim" : "Não")}");
+                Console.WriteLine($"Ativo: {(pessoa.IsAtivo ? "Sim" : "Não")}");
             }
             else
             {
@@ -45,7 +45,7 @@
             {
                 Console.WriteLine($"Nome: {cachorro.Nome}");
                 Console.WriteLine($"Raça: {cachorro.Raca}");
-                Console.WriteLine($"Data de nascimento: {cachorro.DataNascimento}");
+                Console.WriteLine($"Data de nascimento: {cachorro.DataDeNascimento}");
                 Console.WriteLine($"Idade: {cachorro.Idade} anos");
                 Console.WriteLine($"Status: {cachorro.Status}");
                 Console.WriteLine($"Adestrado: {(cachorro.IsAdestrado ? "Sim" : "Não")}");
