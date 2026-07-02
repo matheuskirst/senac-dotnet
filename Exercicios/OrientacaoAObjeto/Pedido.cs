@@ -3,7 +3,7 @@
     internal class Pedido
     {
         public Pedido(Pessoa cliente, List<Produto> produtos, DateTime dataDoServico)
-    {
+        {
             Cliente = cliente;
             DataDoServico = dataDoServico;
             Produtos = produtos;
@@ -16,14 +16,14 @@
             string observacao = "Nenhuma",
             bool isPago = false
             )
-    {
+        {
             Cliente = cliente;
             DataDoServico = dataDoServico;
             Produtos = produtos;
             ValorTotal = CalcularValorTotal(produtos);
             Observacao = observacao;
             IsPago = isPago;
-    }
+        }
 
         public Pessoa Cliente { get; private set; }
         public DateTime DataDoServico { get; private set; }
